@@ -23,17 +23,24 @@ from TTS.api import TTS
 from langchain.agents import ZeroShotAgent, Tool, AgentExecutor
 from langchain.utilities import SerpAPIWrapper
 import whisper
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class MessageView(APIView):
     def post(self, request):
         message = request.data.get('message')
         
-        os.environ["OPENAI_API_KEY"] = "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"
-        os.environ["SERPAPI_API_KEY"] = "fbe0e5ac5108eb463927a5cca87ab3f0af77a70a5ba62c9201780fecbd90870f"
+        OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+        SERPAPI_API_KEY = os.getenv('SERPAPI_API_KEY')
+        PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
+        
+        os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+        os.environ["SERPAPI_API_KEY"] = SERPAPI_API_KEY
 
         # initialize pinecone
-        pinecone.init(api_key="02dca52f-fed0-4499-9b88-b1a924de76a0", environment="us-east1-gcp")
+        pinecone.init(api_key=PINECONE_API_KEY, environment="us-east1-gcp")
 
         index_name = "election"
         chat = ChatOpenAI(temperature=0, model='gpt-3.5-turbo')
