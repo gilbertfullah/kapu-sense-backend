@@ -19,10 +19,8 @@ from langchain.prompts.chat import (ChatPromptTemplate, SystemMessagePromptTempl
 from langchain.schema import (AIMessage, HumanMessage, SystemMessage)
 from langchain.document_loaders import DirectoryLoader
 from langchain.chains import VectorDBQA
-from TTS.api import TTS
 from langchain.agents import ZeroShotAgent, Tool, AgentExecutor
 from langchain.utilities import SerpAPIWrapper
-import whisper
 from dotenv import load_dotenv
 
 load_dotenv()
